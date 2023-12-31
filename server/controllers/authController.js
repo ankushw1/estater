@@ -17,7 +17,7 @@ authController.post('/register', async (req, res) => {
 
         const { password, ...others } = newUser._doc;
 
-        const token = jwt.sign({ id: newUser._id }, process.env.JWT_TOKEN, { expiresIn: '1h' });
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_TOKEN, { expiresIn: '5h' });
 
         res.status(201).json({ ...others, token });
 
@@ -45,7 +45,7 @@ authController.post('/login', async(req,res) => {
 
         const {password,...others} = user._doc
 
-        const token = await jwt.sign({id:user._id},process.env.JWT_TOKEN,{expiresIn:'1h'})
+        const token = await jwt.sign({id:user._id},process.env.JWT_TOKEN,{expiresIn:'5h'})
 
         res.status(200).json({...others,token})
 

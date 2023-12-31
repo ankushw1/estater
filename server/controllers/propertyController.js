@@ -64,7 +64,7 @@ propertyController.get("/find/types", async (req, res) => {
 // Get individual property
 propertyController.get("/find/:id", async (req, res) => {
   try {
-    const individualProperty = await Propery.find(req.params.id).populate(
+    const individualProperty = await Propery.findById(req.params.id).populate(
       "currentOwner",
       "-password"
     );
@@ -96,7 +96,7 @@ propertyController.put("/:id", verifyToken, async (req, res) => {
   try {
     const property = await Property.findById(req.params.id);
 
-    if (property.currentOwner !== req.user.id) {
+    if (property.currentOwner.toString() !== req.user.id) {
       throw new Error("You are not allow to update other people properties");
     } else {
       const updatedProperty = await Property.findByIdAndUpdate(
@@ -115,7 +115,7 @@ propertyController.put("/:id", verifyToken, async (req, res) => {
 propertyController.delete('/:id',verifyToken,async(req,res) => {
     try{
         const property = await Property.findById(req.param.id)
-        if(property.currentOwner!==req.user.id){
+        if(property.currentOwner.toString() !==req.user.id){
             throw new Error('You are not allow to delee other people properties')
         }else{
             await property.delete()

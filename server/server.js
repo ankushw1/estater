@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const authController = require('./controllers/authController');
 const propertyController = require("./controllers/propertyController");
+const uploadController = require("./controllers/uploadController");
 
 
 const app = express();
@@ -23,6 +24,11 @@ mongoose
 
 
 app.use('/auth',authController)
-app.use('/',propertyController)
+app.use('/property',propertyController)
+app.use('/upload',uploadController)
 
-const PORT = process.
+const PORT = process.env.PORT
+
+app.listen(PORT , () => {
+  console.log(`server is connected successfully on ${PORT}!!!`);
+});

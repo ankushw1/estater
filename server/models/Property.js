@@ -19,7 +19,6 @@ const PropertySchema = new mongoose.Schema({
     desc: {
         type: String,
         required: true,
-        min: 50,
     },
     img: {
         type: String,
@@ -32,7 +31,6 @@ const PropertySchema = new mongoose.Schema({
     sqmeters: {
         type: Number,
         required: true,
-        min: 15
     },
     continent: {
         type: String,
